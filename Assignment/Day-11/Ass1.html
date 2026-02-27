@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Move Car</title>
+    <style>
+        body {
+            margin-top: 50px;
+        }
+
+        #car {
+            position: relative;
+            left: 0px;
+            width: 200px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>Move the Car 🚗</h2>
+
+<img id="car" src="https://w7.pngwing.com/pngs/64/222/png-transparent-car-transport-cartoon-car-child-vehicle-cartoon-car-thumbnail.png">
+
+<br><br>
+
+<button onclick="moveCar()">Move Forward</button>
+
+<script>
+    let position = 0;
+
+    function moveCar() {
+        position += 20;
+        document.getElementById("car").style.left = position + "px";
+    }
+</script>
+
+</body>
+</html>

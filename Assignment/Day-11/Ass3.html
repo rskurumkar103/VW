@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Birthday Message</title>
+    <style>
+        body {
+            text-align: center;
+            margin-top: 50px;
+            font-family: Arial, sans-serif;
+        }
+
+        .birthday {
+            font-size: 50px;
+            color: hotpink;
+            font-weight: bold;
+            animation: glow 1s infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px gold; }
+            to { text-shadow: 0 0 30px red; }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<h4>There is a message for you!!</h4>
+<p id="message">wait..</p>
+<button onclick="showMessage()">Click here to get it!</button>
+<br>
+
+
+<script>
+    let count = 0;
+    let size = 20;
+    let colors = ["red", "blue", "green", "purple", "orange"];
+
+    function showMessage() {
+        let msg = document.getElementById("message");
+        count++;
+
+        if (count < 4) {
+            size += 20;
+            msg.style.fontSize = size + "px";
+            msg.style.color = colors[count % colors.length];
+        } else {
+            msg.innerHTML = "🎉 Happy Birthday 🎂";
+            msg.className = "birthday";
+            msg.style.fontSize = "";
+            msg.style.color = "";
+            document.getElementById("bdayImg").style.display = "block";
+        }
+    }
+</script>
+
+</body>
+</html>
