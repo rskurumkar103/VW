@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>List</title>
+</head>
+<body>
+    <h2>Names</h2>
+    <ul>
+        {% for name in names %}
+            <li>{{ name |upper }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
