@@ -4,13 +4,11 @@ from flask_migrate import Migrate
 from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
 
-# Initialize the Flask app
 app = Flask(__name__)
 
-# Load configuration from config.py
+# Load conf
 app.config.from_object('config.Config')
 
-# Initialize database and migrations
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 

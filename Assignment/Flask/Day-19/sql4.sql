@@ -1,10 +1,10 @@
--- Step 1: Create the Database (if not already created)
+
 CREATE DATABASE IF NOT EXISTS ecommerce;
 
--- Step 2: Select the Database to Use
+--Select the Database to Use
 USE ecommerce;
 
--- Step 3: Create the Orders Table
+-- Create the Orders Table
 
 CREATE TABLE Orders (
     order_id INT PRIMARY KEY,
@@ -14,21 +14,20 @@ CREATE TABLE Orders (
     total_amount DECIMAL(10, 2)
 );
 
--- Step 4: Insert Sample Data into the Orders Table
+-- Insert Sample Data into the Orders Table
 
 INSERT INTO Orders (order_id, customer_id, product_id, quantity, total_amount) VALUES
-(1, 101, 1, 2, 200.00),  -- Customer 101 bought 2 products with total amount 200
-(2, 102, 2, 1, 150.00),  -- Customer 102 bought 1 product with total amount 150
-(3, 101, 3, 3, 300.00),  -- Customer 101 bought 3 products with total amount 300
-(4, 103, 1, 5, 500.00),  -- Customer 103 bought 5 products with total amount 500
-(5, 104, 4, 10, 1000.00), -- Customer 104 bought 10 products with total amount 1000
-(6, 101, 2, 2, 300.00),  -- Customer 101 bought 2 products with total amount 300
-(7, 102, 1, 1, 100.00),  -- Customer 102 bought 1 product with total amount 100
-(8, 101, 4, 7, 700.00),  -- Customer 101 bought 7 products with total amount 700
-(9, 105, 3, 4, 600.00),  -- Customer 105 bought 4 products with total amount 600
-(10, 103, 5, 6, 600.00);  -- Customer 103 bought 6 products with total amount 600
+(1, 101, 1, 2, 200.00),  
+(2, 102, 2, 1, 150.00), 
+(3, 101, 3, 3, 300.00),  
+(4, 103, 1, 5, 500.00),  
+(5, 104, 4, 10, 1000.00), --
+(6, 101, 2, 2, 300.00),  
+(7, 102, 1, 1, 100.00), 
+(8, 101, 4, 7, 700.00),  
+(9, 105, 3, 4, 600.00),  
+(10, 103, 5, 6, 600.00);  
 
--- Step 5: SQL Queries for the Given Tasks
 
 -- 1. Find the total amount spent by each customer
 SELECT customer_id, SUM(total_amount) AS total_spent
