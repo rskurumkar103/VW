@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Perfect Touch Crash</title>
+  <style>
+    body {
+      margin: 0;
+      text-align: center;
+      background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+      overflow: hidden;
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+    }
+
+    h1 {
+      margin-top: 30px;
+      font-size: 40px;
+      letter-spacing: 2px;
+      text-shadow: 0 0 15px cyan;
+    }
+
+    .controls {
+      margin: 20px;
+    }
+
+    button {
+      padding: 12px 25px;
+      margin: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      border-radius: 30px;
+      background: linear-gradient(45deg, #ff512f, #dd2476);
+      color: white;
+      font-weight: bold;
+      box-shadow: 0 0 15px #ff4e50;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 25px #ff4e50;
+    }
+
+    .road {
+      position: relative;
+      width: 100%;
+      height: 260px;
+      background: #111;
+      margin-top: 120px;
+      border-top: 4px solid #999;
+      border-bottom: 4px solid #999;
+      box-shadow: inset 0 0 40px black;
+    }
+
+    .road::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      height: 4px;
+      background: repeating-linear-gradient(
+        to right,
+        white 0px,
+        white 40px,
+        transparent 40px,
+        transparent 80px
+      );
+      transform: translateY(-50%);
+      opacity: 0.7;
+    }
+
+    .car {
+      position: absolute;
+      bottom: 70px;
+      font-size: 140px;
+      transition: transform 0.8s ease-in;
+      filter: drop-shadow(0 0 15px cyan);
+    }
+
+    #car1 {
+      left: 0;
+      transform: scaleX(-1);
+    }
+
+    #car2 {
+      right: 0;
+    }
+
+    .explosion {
+      position: absolute;
+      font-size: 170px;
+      display: none;
+      animation: boom 0.6s ease-out;
+    }
+
+    @keyframes boom {
+      0% { transform: scale(0.5); opacity: 0; }
+      50% { transform: scale(1.3); opacity: 1; }
+      100% { transform: scale(1); }
+    }
+
+    .popup {
+      position: fixed;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0, 0, 0, 0.9);
+      padding: 30px 50px;
+      border-radius: 20px;
+      display: none;
+      box-shadow: 0 0 40px red;
+      font-size: 24px;
+      font-weight: bold;
+      color: #ff4e50;
+      text-shadow: 0 0 10px red;
+      animation: fadeIn 0.6s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translate(-50%, -60%); }
+      to { opacity: 1; transform: translate(-50%, -50%); }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🔥 Perfect Bumper Touch 🔥</h1>
+
+  <div class="controls">
+    <button onclick="startCar1()">Start Car 1</button>
+    <button onclick="startCar2()">Start Car 2</button>
+  </div>
+
+  <div class="road">
+    <div id="car1" class="car">🚗</div>
+    <div id="car2" class="car">🚗</div>
+    <div id="explosion" class="explosion">💥</div>
+  </div>
+
+  <div id="popup" class="popup">
+    💀 Hope you both have insurance 💀
+  </div>
+
+<script>
+let car1 = document.getElementById("car1");
+let car2 = document.getElementById("car2");
+let explosion = document.getElementById("explosion");
+let popup = document.getElementById("popup");
+
+let speed = 6;
+let move1 = false;
+let move2 = false;
+let crashed = false;
+
+function startCar1() { move1 = true; }
+function startCar2() { move2 = true; }
+
+function moveCars() {
+
+  if (crashed) return requestAnimationFrame(moveCars);
+
+  if (move1) {
+    car1.style.left = (car1.offsetLeft + speed) + "px";
+  }
+
+  if (move2) {
+    car2.style.right = (parseInt(car2.style.right || 0) + speed) + "px";
+  }
+
+  let rect1 = car1.getBoundingClientRect();
+  let rect2 = car2.getBoundingClientRect();
+
+  if (rect1.right >= rect2.left) {
+    crashed = true;
+    move1 = false;
+    move2 = false;
+    crash(rect1, rect2);
+  }
+
+  requestAnimationFrame(moveCars);
+}
+
+function crash(rect1, rect2) {
+
+  let impactPoint = rect2.left - 80;
+
+  explosion.style.left = impactPoint + "px";
+  explosion.style.top = "140px";
+  explosion.style.display = "block";
+
+  popup.style.display = "block";
+
+  car1.style.transform = "scaleX(-1) rotate(90deg) translateY(250px)";
+  car2.style.transform = "rotate(-90deg) translateY(250px)";
+}
+
+moveCars();
+</script>
+
+</body>
+</html>
