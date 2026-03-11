@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee List</title>
+</head>
+<body>
+    <h1>Employees</h1>
+    <ul>
+        {% for employee in employees %}
+            <li>{{ employee.name }} - {{ employee.department }} 
+                <a href="{{ url_for('employee_profile', id=employee.id) }}">View Profile</a>
+                {% if session['role'] == 'Admin' %}
+                    | <a href="{{ url_for('edit_employee', id=employee.id) }}">Edit</a>
+                    | <a href="{{ url_for('delete_employee', id=employee.id) }}">Delete</a>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <br>
+    <a href="{{ url_for('home') }}">Back to Home</a>
+</body>
+</html>
